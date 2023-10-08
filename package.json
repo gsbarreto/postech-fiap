@@ -1,0 +1,33 @@
+{
+  "name": "postech-fiap",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npx nodemon",
+    "build": "rimraf ./dist && tsc",
+    "start": "npm run build && node dist/index.js",
+    "test": "vitest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gsbarreto/postech-fiap.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gsbarreto/postech-fiap/issues"
+  },
+  "homepage": "https://github.com/gsbarreto/postech-fiap#readme",
+  "devDependencies": {
+    "@types/node": "^20.8.3",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.2.2",
+    "vitest": "^0.34.6"
+  },
+  "dependencies": {
+    "nodemon": "^3.0.1",
+    "ts-node": "^10.9.1"
+  }
+}
