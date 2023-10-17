@@ -5,8 +5,12 @@ export default class ClientController {
   constructor(private readonly clientService: ClientService) {}
 
   async getClientByCPF(req: Request, res: Response) {
-    const { cpf } = req.params;
-    const user = await this.clientService.getClientByCPF(cpf);
-    res.status(200).json(user);
+    try {
+      const { cpf } = req.params;
+      const client = await this.clientService.getClientByCPF(cpf);
+      return res.status(200).json(client);
+    } catch (error: any) {
+      return res.status(500).json({ error: error.message });
+    }
   }
 }
