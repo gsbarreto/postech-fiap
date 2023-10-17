@@ -10,15 +10,50 @@ export default class ProductController {
     res.status(200).json(products);
   }
 
+  async getProductById(req: Request, res: Response) {
+   try{
+    const { id } = req.params;
+    const product = await this.productService.getProductById(parseInt(id));
+    res.status(200).json(product);
+   }catch(error){
+     res.status(404).json(error);
+   }
+  }
+
   async postProduct(req: Request, res: Response) {
    try {
      const product: Product = req.body;
-     console.log(product);
      await this.productService.post(product);
     
-   } catch (error) {
+     res.status(200).json("INSERIDO");
+   
+    } catch (error) {
      res.status(500).json(error);
    }
-    res.status(200).json("INSERIDO");
   }
+
+  async putProduct(req: Request, res: Response) {
+    try {
+      const product: Product = req.body;
+      await this.productService.put(product);
+      res.status(200).json("PRODUTO ATUALIZADO!");
+     
+    } catch (error) {
+      res.status(500).json(error);
+    }
+   }
+
+   async deleteProduct(req: Request, res: Response) {
+    try {
+      const { id }= req.params;
+      await this.productService.delete(parseInt(id));
+     
+      res.status(200).json("PRODUTO DELETADO!");
+     
+    } catch (error) {
+      res.status(500).json(error);
+    }
+   }
+
+  
 }

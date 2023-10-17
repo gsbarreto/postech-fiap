@@ -28,12 +28,29 @@ const PORT = process.env.PORT || 3000;
     "/products",
     productController.getAll.bind(productController)
   );
+   
+  //#TODO - INSERIR VALIDAÇÃO
+  server.get(
+    "/product/:id",
+    productController.getProductById.bind(productController)
+  );
 
   //#TODO - INSERIR VALIDAÇÃO 
   server.post(
     "/product",
     productController.postProduct.bind(productController)
   );
+
+   //#TODO - INSERIR VALIDAÇÃO 
+   server.put(
+    "/product",
+    productController.putProduct.bind(productController)
+  );
+
+    //#TODO - INSERIR VALIDAÇÃO 
+    server.delete("/product/:id",
+      productController.deleteProduct.bind(productController)
+    );
 
   server.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
 })();

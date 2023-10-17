@@ -1,6 +1,9 @@
 import Product from "../../domain/product";
 
 export default interface IProductRepository {
-  get(): Promise<Product[]>;
+  getAll(): Promise<Product[]>;
+  get(id: Number): Promise<Product>;
   post(product: Product): void;
+  put(product: Product): void;
+  delete(id: Number): void;
 }
