@@ -1,4 +1,3 @@
-export default interface Client {
-  name: string;
-  cpf: string;
+export default class Client {
+  constructor(readonly name: string, readonly cpf: string) {}
 }
