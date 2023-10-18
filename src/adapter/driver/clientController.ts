@@ -1,4 +1,4 @@
-import ClientService from "../../core/applications/services/userService";
+import ClientService from "../../core/applications/services/clientService";
 import { Request, Response } from "express";
 
 export default class ClientController {
