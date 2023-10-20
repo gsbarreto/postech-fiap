@@ -13,7 +13,7 @@ test("should create a client", async () => {
     name,
     cpf,
   });
-  const client = await clientRepositoryMemory.get(cpf);
+  const client = await clientRepositoryMemory.get({ cpf });
   expect(client.name).toBe(name);
   expect(client.cpf).toBe(cpf);
 });
@@ -21,11 +21,11 @@ test("should create a client", async () => {
 test("should get a client", async () => {
   const name = "Maria";
   const cpf = "32132132132";
-  const newClient = new Client(name, cpf);
+  const newClient = new Client(null, name, cpf);
   const clientRepositoryMemory = new InMemoryClientRepository();
   await clientRepositoryMemory.save(newClient);
   const getClient = new GetClient(clientRepositoryMemory);
-  const client = await getClient.execute(cpf);
+  const client = await getClient.execute({ cpf });
   expect(client.name).toBe(name);
   expect(client.cpf).toBe(cpf);
 });

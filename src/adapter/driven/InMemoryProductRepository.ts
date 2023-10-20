@@ -23,11 +23,11 @@ export default class InMemoryProductRepository implements IProductRepository {
     return product;
   }
 
-  async save(product: Product) {
+  async save(product: Product): Promise<Product> {
     try {
       product.setID(crypto.randomUUID());
       this.products.push(product);
-      return;
+      return product;
     } catch (error) {
       throw new Error("Erro ao inserir produto: " + error);
     }

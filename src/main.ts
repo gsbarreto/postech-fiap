@@ -20,16 +20,19 @@ const PORT = process.env.PORT || 3000;
   const clientRepository = new InMemoryClientRepository();
   const productRepository = new InMemoryProductRepository();
 
-  server.get("/client/:cpf", async (request: Request, response: Response) => {
-    try {
-      const { cpf } = request.params;
-      const getClient = new GetClient(clientRepository);
-      const client = await getClient.execute(cpf);
-      response.status(200).json(client);
-    } catch (err: any) {
-      response.status(500).send(err.message);
+  server.get(
+    "/client/cpf/:cpf",
+    async (request: Request, response: Response) => {
+      try {
+        const { cpf } = request.params;
+        const getClient = new GetClient(clientRepository);
+        const client = await getClient.execute({ cpf });
+        response.status(200).json(client);
+      } catch (err: any) {
+        response.status(500).send(err.message);
+      }
     }
-  });
+  );
 
   server.post("/client", async (request: Request, response: Response) => {
     try {
@@ -155,6 +158,9 @@ const PORT = process.env.PORT || 3000;
       }
     }
   );
+
+  //TODO - Implementar rota de checkout
+  //TODO - Implementar rota de obter pedidos
 
   server.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
 })();

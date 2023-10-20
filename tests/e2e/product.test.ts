@@ -73,7 +73,6 @@ test("should create two products and filter by category", async () => {
   const productsByCategory = await axios.get(
     "http://localhost:3000/product/category/BEBIDA"
   );
-  console.log("das", productsByCategory.data);
   expect(productsByCategory.status).toBe(200);
   expect(productsByCategory.data.length).toBe(1);
 });

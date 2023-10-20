@@ -5,7 +5,7 @@ export default class CreateClient {
   constructor(readonly clientRepository: IClientRepository) {}
 
   async execute(input: Input) {
-    await this.clientRepository.save(new Client(input.name, input.cpf));
+    await this.clientRepository.save(new Client(null, input.name, input.cpf));
   }
 }
 
