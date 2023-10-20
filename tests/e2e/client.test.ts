@@ -10,8 +10,9 @@ test("should create and get a client", async () => {
   });
   expect(responseCreate.status).toBe(201);
   const responseGetClient = await axios.get(
-    `http://localhost:3000/client/${cpf}`
+    `http://localhost:3000/client/cpf/${cpf}`
   );
   expect(responseGetClient.status).toBe(200);
-  expect(responseGetClient.data).toEqual({ name, cpf });
+  expect(responseGetClient.data.name).toBe(name);
+  expect(responseGetClient.data.cpf).toBe(cpf);
 });
