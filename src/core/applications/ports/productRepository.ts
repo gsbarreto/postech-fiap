@@ -1,9 +1,14 @@
+import Category from "../../domain/category";
 import Product from "../../domain/product";
 
 export default interface IProductRepository {
-  getAll(): Promise<Product[]>;
-  get(id: Number): Promise<Product>;
-  post(product: Product): void;
-  put(product: Product): void;
-  delete(id: Number): void;
+  list(input?: InputList): Promise<Product[]>;
+  get(id: string): Promise<Product>;
+  save(product: Product): void;
+  update(product: Product): void;
+  remove(id: string): void;
 }
+
+type InputList = {
+  category?: Category;
+};
