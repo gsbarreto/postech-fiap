@@ -11,3 +11,6 @@
 - [ ] Fake checkout, apenas enviar produtos para fila
 - [ ] Listar pedidos
 - [ ] Trabalhar e organizar a fila de pedidos apenas no banco de dados
+- [ ] Adicionar o banco de dados MongoDB
+- [ ] Docker
+- [ ] Swagger

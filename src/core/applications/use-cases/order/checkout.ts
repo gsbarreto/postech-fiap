@@ -1,12 +1,12 @@
 import Order from "../../../domain/order";
-import IClientRepository from "../../ports/clientRepository";
+import ICustomerRepository from "../../ports/customerRepository";
 import IOrderRepository from "../../ports/orderRepository";
 import IProductRepository from "../../ports/productRepository";
 
 export default class Checkout {
   constructor(
     readonly orderRepository: IOrderRepository,
-    readonly clientRepository: IClientRepository,
+    readonly customerRepository: ICustomerRepository,
     readonly productRepository: IProductRepository
   ) {}
 
@@ -14,8 +14,8 @@ export default class Checkout {
     const { userId, products } = input;
 
     if (!userId) throw new Error("Invalid user id!");
-    const client = await this.clientRepository.get({ id: userId });
-    if (!client) throw new Error("Client not found!");
+    const customer = await this.customerRepository.get({ id: userId });
+    if (!customer) throw new Error("Customer not found!");
 
     if (products.length === 0) throw new Error("Empty cart!");
 
@@ -33,7 +33,7 @@ export default class Checkout {
         };
       })
     );
-    const order = new Order(null, client, itemsAndQuantities);
+    const order = new Order(null, customer, itemsAndQuantities);
     const orderProcessed = await this.orderRepository.save(order);
     return orderProcessed;
   }

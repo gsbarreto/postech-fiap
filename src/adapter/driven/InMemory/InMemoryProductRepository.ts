@@ -1,6 +1,6 @@
-import IProductRepository from "../../core/applications/ports/productRepository";
-import Category from "../../core/domain/category";
-import Product from "../../core/domain/product";
+import IProductRepository from "../../../core/applications/ports/productRepository";
+import Category from "../../../core/domain/category";
+import Product from "../../../core/domain/product";
 import crypto from "crypto";
 
 export default class InMemoryProductRepository implements IProductRepository {

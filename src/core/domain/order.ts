@@ -1,4 +1,4 @@
-import Client from "./client";
+import Customer from "./customer";
 import Product from "./product";
 
 export default class Order {
@@ -6,7 +6,7 @@ export default class Order {
   status: OrderStatus;
   constructor(
     id: null | string,
-    readonly client: Client,
+    readonly customer: Customer,
     readonly items: productAndQuantity[]
   ) {
     this.id = id;

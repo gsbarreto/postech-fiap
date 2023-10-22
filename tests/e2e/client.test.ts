@@ -1,18 +1,18 @@
 import axios from "axios";
 import { expect, test } from "vitest";
 
-test("should create and get a client", async () => {
+test("should create and get a customer", async () => {
   const name = "João Silva";
   const cpf = "12345678910";
-  const responseCreate = await axios.post("http://localhost:3000/client", {
+  const responseCreate = await axios.post("http://localhost:3000/customer", {
     name,
     cpf,
   });
   expect(responseCreate.status).toBe(201);
-  const responseGetClient = await axios.get(
-    `http://localhost:3000/client/cpf/${cpf}`
+  const responseGetCustomer = await axios.get(
+    `http://localhost:3000/customer/cpf/${cpf}`
   );
-  expect(responseGetClient.status).toBe(200);
-  expect(responseGetClient.data.name).toBe(name);
-  expect(responseGetClient.data.cpf).toBe(cpf);
+  expect(responseGetCustomer.status).toBe(200);
+  expect(responseGetCustomer.data.name).toBe(name);
+  expect(responseGetCustomer.data.cpf).toBe(cpf);
 });
