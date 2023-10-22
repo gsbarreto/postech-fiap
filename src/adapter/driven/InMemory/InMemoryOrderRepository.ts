@@ -1,5 +1,5 @@
-import IOrderRepository from "../../core/applications/ports/orderRepository";
-import Order from "../../core/domain/order";
+import IOrderRepository from "../../../core/applications/ports/orderRepository";
+import Order from "../../../core/domain/order";
 import crypto from "crypto";
 
 export default class InMemoryOrderrepository implements IOrderRepository {

@@ -1,6 +1,6 @@
 import { test, expect } from "vitest";
 import CreateProduct from "../../src/core/applications/use-cases/product/createProduct";
-import InMemoryProductRepository from "../../src/adapter/driven/InMemoryProductRepository";
+import InMemoryProductRepository from "../../src/adapter/driven/InMemory/InMemoryProductRepository";
 import Category from "../../src/core/domain/category";
 import RemoveProduct from "../../src/core/applications/use-cases/product/removeProduct";
 import Product from "../../src/core/domain/product";

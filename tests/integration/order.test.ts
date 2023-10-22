@@ -1,9 +1,9 @@
 import { test, expect, should } from "vitest";
 import Checkout from "../../src/core/applications/use-cases/order/checkout";
-import InMemoryOrderrepository from "../../src/adapter/driven/InMemoryOrderRepository";
-import InMemoryClientRepository from "../../src/adapter/driven/InMemoryClientRepository";
-import InMemoryProductRepository from "../../src/adapter/driven/InMemoryProductRepository";
-import Client from "../../src/core/domain/client";
+import InMemoryOrderrepository from "../../src/adapter/driven/InMemory/InMemoryOrderRepository";
+import InMemoryCustomerRepository from "../../src/adapter/driven/InMemory/InMemoryCustomerRepository";
+import InMemoryProductRepository from "../../src/adapter/driven/InMemory/InMemoryProductRepository";
+import Customer from "../../src/core/domain/customer";
 import Product from "../../src/core/domain/product";
 import Category from "../../src/core/domain/category";
 import Order from "../../src/core/domain/order";
@@ -11,10 +11,10 @@ import GetOrders from "../../src/core/applications/use-cases/order/getOrders";
 
 test("should do a checkout", async () => {
   const orderRepository = new InMemoryOrderrepository();
-  const clientRepository = new InMemoryClientRepository();
+  const customerRepository = new InMemoryCustomerRepository();
   const productRepository = new InMemoryProductRepository();
-  const client = new Client(null, "João Barbosa", "000.111.222-33");
-  await clientRepository.save(client);
+  const customer = new Customer(null, "João Barbosa", "000.111.222-33");
+  await customerRepository.save(customer);
 
   const product1 = new Product(
     null,
@@ -37,19 +37,18 @@ test("should do a checkout", async () => {
 
   const checkout = new Checkout(
     orderRepository,
-    clientRepository,
+    customerRepository,
     productRepository
   );
   const order = await checkout.execute({
-    userId: client.id || "",
+    userId: customer.id || "",
     products: [
       { id: product1.id || "", quantity: 2 },
       { id: product2.id || "", quantity: 1 },
     ],
   });
-  console.log(order);
   expect(order.items.length).toBe(2);
-  expect(order.client.cpf).toBe(client.cpf);
+  expect(order.customer.cpf).toBe(customer.cpf);
   const product1Processed = order.items.filter(
     (item) => item.product.id === product1.id
   );
@@ -64,10 +63,10 @@ test("should do a checkout", async () => {
 
 test("should list orders", async () => {
   const orderRepository = new InMemoryOrderrepository();
-  const clientRepository = new InMemoryClientRepository();
+  const customerRepository = new InMemoryCustomerRepository();
   const productRepository = new InMemoryProductRepository();
 
-  const order1 = new Order("1", new Client("1", "Name 1", "000.000.000-01"), [
+  const order1 = new Order("1", new Customer("1", "Name 1", "000.000.000-01"), [
     {
       product: new Product(
         "123",
@@ -82,7 +81,7 @@ test("should list orders", async () => {
   ]);
   orderRepository.save(order1);
 
-  const order2 = new Order("2", new Client("2", "Name 2", "000.000.000-02"), [
+  const order2 = new Order("2", new Customer("2", "Name 2", "000.000.000-02"), [
     {
       product: new Product(
         "321",
@@ -102,8 +101,8 @@ test("should list orders", async () => {
   const orders = await getOrders.execute();
 
   expect(orders.length).toBe(2);
-  const clientsNames = orders.map((order) => order.client.name);
-  expect(clientsNames).toEqual(["Name 1", "Name 2"]);
+  const customersNames = orders.map((order) => order.customer.name);
+  expect(customersNames).toEqual(["Name 1", "Name 2"]);
   const ordersIds = orders.map((order) => order.items[0].product.id);
   expect(ordersIds).toEqual(["123", "321"]);
   const itemsQuantities = orders.map((order) => order.items[0].quantity);
