@@ -56,8 +56,9 @@ export default async () => {
     "/product/category/:category",
     productController.getProductByCategory.bind(productController)
   );
-  server.post("/checkout", orderController.checkout.bind(orderController));
-  //TODO - Implementar rota de obter pedidos
+  server.post("/order/checkout", orderController.checkout.bind(orderController));
+
+  server.get("/order", orderController.getOrders.bind(orderController));
 
   server.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
 };
