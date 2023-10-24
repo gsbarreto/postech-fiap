@@ -1,4 +1,7 @@
 import express from "express";
+import swaggerUI from 'swagger-ui-express';
+import swaggerDocument from '../../../swagger.json';
+
 //Repositories
 import InMemoryCustomerRepository from "../../driven/InMemory/InMemoryCustomerRepository";
 import InMemoryOrderRepository from "../../driven/InMemory/InMemoryOrderRepository";
@@ -10,6 +13,7 @@ import ProductController from "./controllers/product.controller";
 
 const server = express();
 server.use(express.json());
+server.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 const PORT = process.env.PORT || 3000;
 
 export default async () => {
