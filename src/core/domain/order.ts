@@ -2,7 +2,7 @@ import Customer from "./customer";
 import Product from "./product";
 
 export default class Order {
-  id?: string | null;
+  id?: string | null | undefined;
   status: OrderStatus;
   constructor(
     id: null | string,
@@ -27,7 +27,7 @@ type productAndQuantity = {
   quantity: number;
 };
 
-enum OrderStatus {
+export enum OrderStatus {
   PENDING = "pending",
   DELIVERED = "delivered",
 }

@@ -8,9 +8,9 @@
 - [x] Editar produto
 - [x] Remover produto
 - [x] Buscar produtos por categoria
-- [ ] Fake checkout, apenas enviar produtos para fila
-- [ ] Listar pedidos
-- [ ] Trabalhar e organizar a fila de pedidos apenas no banco de dados
-- [ ] Adicionar o banco de dados MongoDB
+- [x] Fake checkout, apenas enviar produtos para fila
+- [x] Listar pedidos
+- [x] Trabalhar e organizar a fila de pedidos apenas no banco de dados
+- [x] Adicionar o banco de dados MongoDB
 - [ ] Docker
-- [ ] Swagger
+- [x] Swagger
