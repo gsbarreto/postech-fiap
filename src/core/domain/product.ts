@@ -1,9 +1,9 @@
 import Category from "./category";
 
 export default class Product {
-  id: string | null = null;
+  id: string | null | undefined = null;
   constructor(
-    id: string | null,
+    id: string | null | undefined,
     readonly name: string,
     readonly description: string,
     readonly price: Number,

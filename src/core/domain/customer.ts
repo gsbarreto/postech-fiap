@@ -1,5 +1,5 @@
 export default class Customer {
-  id: string | null;
+  id: string | null | undefined;
   constructor(id: string | null, readonly name: string, readonly cpf: string) {
     this.id = id;
   }
