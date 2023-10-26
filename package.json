@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "npx nodemon",
     "build": "rimraf ./dist && tsc",
-    "start": "npm run build && node dist/index.js",
+    "start": "node src/main.js",
     "test": "vitest"
   },
   "repository": {
