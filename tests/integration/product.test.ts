@@ -30,7 +30,6 @@ test("should create, list, edit and remove product", async () => {
 
   getProducts = await axios.get("http://localhost:3000/product/");
   expect(getProducts.status).toBe(200);
-  // expect(getProducts.data.length).toBe(2);
   expect(getProducts.data[0].name).toBe("Monster");
 
   const deleteProduct = await axios.delete(
@@ -40,7 +39,6 @@ test("should create, list, edit and remove product", async () => {
 
   getProducts = await axios.get("http://localhost:3000/product/");
   expect(getProducts.status).toBe(200);
-  // expect(getProducts.data.length).toBe(0);
 });
 
 test("should create two products and filter by category", async () => {
@@ -66,5 +64,4 @@ test("should create two products and filter by category", async () => {
     "http://localhost:3000/product/category/BEBIDA"
   );
   expect(productsByCategory.status).toBe(200);
-  // expect(productsByCategory.data.length).toBe(1);
 });

@@ -43,12 +43,12 @@ export default class OrderController {
     try {
       const getOrders = new GetOrders(this.orderRepository);
       const orders = await getOrders.execute();
-      const responseParsed = orders.map((order) => {
+      const responseParsed = orders?.map((order) => {
         return {
           id: order.id,
           status: order.status,
           items: order.items,
-          customer: order.customer         
+          customer: { ...order.customer, cpf: order.customer.cpf.get() },
         };
       });
       response.status(200).send(responseParsed);
@@ -56,5 +56,4 @@ export default class OrderController {
       response.status(500).send(err.message);
     }
   }
- 
 }

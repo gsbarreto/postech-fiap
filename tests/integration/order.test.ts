@@ -4,7 +4,7 @@ import axios from "axios";
 test("should do a checkout and list all orders", async () => {
   // Create Client
   const name = "João Silva";
-  const cpf = "12345678910";
+  const cpf = "277.013.740-94";
   await axios.post("http://localhost:3000/customer", {
     name,
     cpf,

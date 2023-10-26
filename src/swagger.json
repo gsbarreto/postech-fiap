@@ -253,11 +253,30 @@
         },
         "responses": {
           "200": {
-            "description": "Product created",
+            "description": "Order created",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Product"
+                  "$ref": "#/components/schemas/Order"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/order": {
+      "get": {
+        "summary": "Lista de pedidos",
+        "description": "Obtem lista de pedidos.",
+        "tags": ["Order"],
+        "responses": {
+          "200": {
+            "description": "Orders found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Order"
                 }
               }
             }

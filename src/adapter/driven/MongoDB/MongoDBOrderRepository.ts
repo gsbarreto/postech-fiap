@@ -7,6 +7,7 @@ import Customer from "../../../core/domain/customer";
 import { ProductModel } from "./schemas/Product";
 import Product from "../../../core/domain/product";
 import Category from "../../../core/domain/category";
+import CPF from "../../../core/domain/value-objects/cpf";
 
 export default class MongoDBOrderrepository implements IOrderRepository {
   orders: Order[] = [];
@@ -17,6 +18,7 @@ export default class MongoDBOrderrepository implements IOrderRepository {
   }
   async list(): Promise<Order[]> {
     const orders = await OrderModel.find({}).exec();
+    if (orders.length === 0) return [];
     return await Promise.all(
       orders.map(async (order) => {
         const customerFound = await CustomerModel.findOne({
@@ -26,7 +28,7 @@ export default class MongoDBOrderrepository implements IOrderRepository {
         const customer = new Customer(
           customerFound.id,
           customerFound.name,
-          customerFound.cpf
+          new CPF(customerFound.cpf)
         );
         const arrayItems = await Promise.all(
           order.items.map(async (item) => {
