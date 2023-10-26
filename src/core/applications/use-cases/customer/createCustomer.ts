@@ -1,4 +1,5 @@
 import Customer from "../../../domain/customer";
+import CPF from "../../../domain/value-objects/cpf";
 import ICustomerRepository from "../../ports/customerRepository";
 
 export default class CreateCustomer {
@@ -6,7 +7,7 @@ export default class CreateCustomer {
 
   async execute(input: Input) {
     await this.customerRepository.save(
-      new Customer(null, input.name, input.cpf)
+      new Customer(null, input.name, new CPF(input.cpf))
     );
   }
 }
