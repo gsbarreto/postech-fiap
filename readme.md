@@ -1,16 +1,33 @@
 # Tech Challenger Pos Tech Arquitetura de Software
 
-## To do's
+## Para rodar a aplicação
+```sh
+docker compose up --build
+```
 
-- [x] Cadastro de cliente
-- [x] Identificação do cliente via CPF
-- [x] Criar produto
-- [x] Editar produto
-- [x] Remover produto
-- [x] Buscar produtos por categoria
-- [x] Fake checkout, apenas enviar produtos para fila
-- [x] Listar pedidos
-- [x] Trabalhar e organizar a fila de pedidos apenas no banco de dados
-- [x] Adicionar o banco de dados MongoDB
-- [ ] Docker
-- [x] Swagger
+> Caso apareça o erro: "Error response from daemon: user declined directory sharing ...."
+> Configure o file sharing do docker
+> Fonte: https://stackoverflow.com/questions/70877785/docker-error-response-from-daemon-user-declined-directory-sharing
+
+## Acesso app (porta default)
+{{dominio}}:3000/...
+
+## Link Client Mongo (porta default)
+{{dominio}}:8081
+login:admin
+senha:pass
+
+## Link Swagger (porta default)
+{{dominio}}:3000/api-docs/
+
+## Integrantes Grupo 76
+
+Gabriel da Silva Barreto
+gabrieldasilvabarreto@hotmail.com
+
+Marcelo Gomes do Nascimento
+marcelogn2010@hotmail.com
+
+Bruno Grun
+grunbruno@gmail.com 
+
