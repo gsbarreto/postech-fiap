@@ -10,8 +10,8 @@ export default class CustomerController {
     try {
       const { cpf } = request.params;
       const getCustomer = new GetCustomer(this.customerRepository);
-      const customer = await getCustomer.execute({ cpf });
-      response.status(200).json(customer);
+      let customer = await getCustomer.execute({ cpf });
+      response.status(200).json({ ...customer, cpf: customer.cpf.get() });
     } catch (err: any) {
       response.status(500).send(err.message);
     }

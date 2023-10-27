@@ -1,6 +1,8 @@
+import CPF from "./value-objects/cpf";
+
 export default class Customer {
-  id: string | null;
-  constructor(id: string | null, readonly name: string, readonly cpf: string) {
+  id: string | null | undefined;
+  constructor(id: string | null, readonly name: string, readonly cpf: CPF) {
     this.id = id;
   }
 

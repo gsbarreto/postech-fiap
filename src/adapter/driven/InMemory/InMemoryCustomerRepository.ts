@@ -7,7 +7,10 @@ export default class InMemoryCustomerRepository implements ICustomerRepository {
 
   async get({ cpf, id }: { cpf?: string; id?: string }): Promise<Customer> {
     let customer;
-    if (cpf) customer = this.customer.find((customer) => customer.cpf === cpf);
+    if (cpf) {
+      cpf = cpf.replace(/[^\d]+/g, "");
+      customer = this.customer.find((customer) => customer.cpf.get() === cpf);
+    }
     if (id) customer = this.customer.find((customer) => customer.id === id);
     if (!customer) throw new Error(`Customer not found!`);
     return customer;
