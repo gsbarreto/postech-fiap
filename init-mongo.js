@@ -7,13 +7,13 @@ db.createCollection("products", { capped: false });
 db.customers.insert({
   id: "038ec781-f173-4a96-9ed3-a79d079daf6f",
   name: "João Arruda",
-  cpf: "00000000000",
+  cpf: "57945822002",
 });
 
 db.customers.insert({
   id: "d8be5f97-80b2-4b3e-aa84-cf5250fb3578",
   name: "Francisca Oliveira",
-  cpf: "11111111111",
+  cpf: "53666152082",
 });
 
 db.products.insert({
