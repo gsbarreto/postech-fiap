@@ -12,13 +12,22 @@ docker compose up --build
 ### Acesso app (porta default)
 {{dominio}}:3000/...
 
-### Link Client Mongo (porta default)
+### Postman collection
+https://github.com/gsbarreto/postech-fiap/blob/main/resources/postman-collection/Tech-challenge-Fase1.postman_collection.json
+
+### Client Mongo (porta default)
 {{dominio}}:8081 <br>
 login:admin <br>
 senha:pass
 
-### Link Swagger (porta default)
+### Swagger (porta default)
 {{dominio}}:3000/api-docs/
+
+### Stacks
+- Typescript
+- NodeJS
+- Framework Express
+- Mongo database
 
 ### Integrantes Grupo 76
 
