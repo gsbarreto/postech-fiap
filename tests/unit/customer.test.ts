@@ -1,9 +1,9 @@
 import { test, expect } from "vitest";
-import CreateCustomer from "../../src/core/applications/use-cases/customer/createCustomer";
-import InMemoryCustomerRepository from "../../src/adapter/driven/InMemory/InMemoryCustomerRepository";
-import Customer from "../../src/core/domain/customer";
-import GetCustomer from "../../src/core/applications/use-cases/customer/getCustomer";
-import CPF from "../../src/core/domain/value-objects/cpf";
+import CreateCustomer from "../../src/core/usecase/customer/createCustomer";
+import InMemoryCustomerRepository from "../../src/infra/database/Memory/InMemoryCustomerRepository";
+import Customer from "../../src/core/entity/customer";
+import GetCustomer from "../../src/core/usecase/customer/getCustomer";
+import CPF from "../../src/core/entity/value-objects/cpf";
 
 test("should create a customer", async () => {
   const name = "Joaquim";

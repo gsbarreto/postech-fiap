@@ -1,5 +1,5 @@
 import "dotenv/config";
-import server from "./adapter/driver/express/server";
+import server from "./infra/http/server";
 import { connect } from "mongoose";
 const mongoUrl = process.env.MONGO_URI || "";
 
