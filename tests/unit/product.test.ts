@@ -1,11 +1,11 @@
 import { test, expect } from "vitest";
-import CreateProduct from "../../src/core/applications/use-cases/product/createProduct";
-import InMemoryProductRepository from "../../src/adapter/driven/InMemory/InMemoryProductRepository";
-import Category from "../../src/core/domain/category";
-import RemoveProduct from "../../src/core/applications/use-cases/product/removeProduct";
-import Product from "../../src/core/domain/product";
-import EditProduct from "../../src/core/applications/use-cases/product/editProduct";
-import GetProductsByCategory from "../../src/core/applications/use-cases/product/getProductsByCategory";
+import CreateProduct from "../../src/core/usecase/product/createProduct";
+import InMemoryProductRepository from "../../src/infra/database/Memory/InMemoryProductRepository";
+import Category from "../../src/core/entity/category";
+import RemoveProduct from "../../src/core/usecase/product/removeProduct";
+import Product from "../../src/core/entity/product";
+import EditProduct from "../../src/core/usecase/product/editProduct";
+import GetProductsByCategory from "../../src/core/usecase/product/getProductsByCategory";
 
 test("should create a product", async () => {
   const productObject = {
