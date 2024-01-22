@@ -259,6 +259,41 @@
         }
       }
     },
+    "/order/payment/status": {
+      "get": {
+        "summary": "Validar o status do pedido",
+        "description": "Validar o status de um pedido .",
+        "tags": ["Order"],
+        "parameters": [
+          {
+            "name": "Id",
+            "in": "path",
+            "description": "Id do pedido",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Order found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties":{
+                    "status" :{
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/order/checkout": {
       "post": {
         "summary": "Realiza o processo de checkout",
@@ -302,52 +337,10 @@
         }
       }
     },  
-    "/order/payment/status": {
-      "get": {
-        "summary": "Validar o status do pedido",
-        "description": "Validar o status de um pedido .",
-        "tags": ["Order"],
-        "parameters": [
-          {
-            "name": "Id",
-            "in": "path",
-            "description": "Id do pedido",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "Status",
-            "in": "path",
-            "description": "Status do pedido",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Orders found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Order"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/order/status": {
       "post": {
         "summary": "Atualizar status do pedido",
-        "description": "Esta rota Atualiza o Pedido.",
+        "description": "Esta rota atualiza o status do pedido.",
         "tags": ["Order"],
         "parameters": [
           {
@@ -371,42 +364,48 @@
         ],
         "responses": {
           "200": {
-            "description": "Order created",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Order"
-                }
-              }
-            }
+            "description": "Order updated"
           }
         }
       }
     },
     "/webhook/payment": {
       "post": {
-        "summary": "Fazer o pagamento do pedido",
-        "description": "Fazer o pedido do pagamento.",
-        "tags": ["Payment"],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Payment"
-              }
+        "summary": "Webhook de atualização do pagamento de pedido",
+        "description": "Webhook de atualização do pagamento de pedido",
+        "tags": ["Order"],
+        "parameters": [
+          {
+            "name": "Id",
+            "in": "path",
+            "description": "Id do pedido",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Topic",
+            "in": "path",
+            "description": "Tópico de alteração do pagamento , requerido pelo Mercado Pago",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Status",
+            "in": "path",
+            "description": "Status do pedido",
+            "required": true,
+            "schema": {
+              "type": "string"
             }
           }
-        },
+        ],
         "responses": {
-          "201": {
-            "description": "Payment updated",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Payment"
-                }
-              }
-            }
+          "200": {
+            "description": "Payment updated"
           }
         }
       }
