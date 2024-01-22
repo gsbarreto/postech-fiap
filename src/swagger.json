@@ -3,7 +3,7 @@
   "info": {
     "title": "Pos-Tech Projeto",
     "description": "Projeto de pedidos para o trabalho da pos tech",
-    "version": "1.0.0"
+    "version": "1.0.1"
   },
   "servers": [
     {
@@ -237,20 +237,92 @@
         }
       }
     },
+    "/order": {
+      "get": {
+        "summary": "Lista de pedidos",
+        "description": "Obtem lista de pedidos.",
+        "tags": ["Order"],
+        "responses": {
+          "200": {
+            "description": "Orders found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Order"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/order/payment/status": {
+      "get": {
+        "summary": "Validar o status do pedido",
+        "description": "Validar o status de um pedido .",
+        "tags": ["Order"],
+        "parameters": [
+          {
+            "name": "Id",
+            "in": "path",
+            "description": "Id do pedido",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Order found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties":{
+                    "status" :{
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/order/checkout": {
       "post": {
         "summary": "Realiza o processo de checkout",
         "description": "Esta rota gera um checkout.",
         "tags": ["Order"],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Order"
+        "parameters": [
+          {
+            "name": "Id",
+            "in": "path",
+            "description": "Identificador do Cliente",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+            
+          },
+          {
+            "name": "Products",
+            "in": "body",
+            "description": "Produtos do Cliente",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/Products"
               }
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "Order created",
@@ -264,22 +336,76 @@
           }
         }
       }
-    },
-    "/order": {
-      "get": {
-        "summary": "Lista de pedidos",
-        "description": "Obtem lista de pedidos.",
+    },  
+    "/order/status": {
+      "post": {
+        "summary": "Atualizar status do pedido",
+        "description": "Esta rota atualiza o status do pedido.",
         "tags": ["Order"],
+        "parameters": [
+          {
+            "name": "Id",
+            "in": "path",
+            "description": "Id do pedido",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Status",
+            "in": "path",
+            "description": "Status do pedido",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
-            "description": "Orders found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Order"
-                }
-              }
+            "description": "Order updated"
+          }
+        }
+      }
+    },
+    "/webhook/payment": {
+      "post": {
+        "summary": "Webhook de atualização do pagamento de pedido",
+        "description": "Webhook de atualização do pagamento de pedido",
+        "tags": ["Order"],
+        "parameters": [
+          {
+            "name": "Id",
+            "in": "path",
+            "description": "Id do pedido",
+            "required": true,
+            "schema": {
+              "type": "string"
             }
+          },
+          {
+            "name": "Topic",
+            "in": "path",
+            "description": "Tópico de alteração do pagamento , requerido pelo Mercado Pago",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Status",
+            "in": "path",
+            "description": "Status do pedido",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Payment updated"
           }
         }
       }
@@ -324,14 +450,49 @@
           }
         }
       },
+      "Products": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "number"
+          }
+        }
+      },
       "Order": {
         "type": "object",
         "properties": {
-          "userId": {
+          "id": {
             "type": "string"
           },
-          "products": {
+          "createdAt":{
+            "type": "string",
+            "format": "date"
+          },
+          "payment":{
+            "$ref": "#/components/schemas/Payment"
+          },
+          "itens": {
             "type": "array"
+          },
+          "status":{
+            "type": "string"
+          },
+          "customer": {
+            "$ref": "#/components/schemas/Customer"
+          }
+        }
+      },
+      "Payment": {
+        "type": "object",
+        "properties": {
+          "qrCode": {
+            "type": "string"
+          },
+          "status":{
+            "type": "string"
           }
         }
       }
