@@ -7,6 +7,7 @@ import GetOrders from "../core/usecase/order/getOrders";
 import IPaymentRepository from "../core/repository/paymentRepository";
 import ChangePaymentStatus from "../core/usecase/order/changePaymentStatus";
 import ChangeStatus from "../core/usecase/order/changeStatus";
+import GetPaymentStatus from "../core/usecase/order/getPaymentStatus";
 
 export default class OrderController {
   constructor(
@@ -83,13 +84,12 @@ export default class OrderController {
 
   async getOrderPaymentStatus(request: Request, response: Response) {
     try {
-      const { id, status } = request.query as {
+      const { id } = request.query as {
         id: string;
-        status: "PAID" | "REFUSED";
       };
-      const changePaymentStatus = new ChangePaymentStatus(this.orderRepository);
-      changePaymentStatus.execute(id, status);
-      response.status(200).send();
+      const getPaymentStatus = new GetPaymentStatus(this.orderRepository);
+      const status = getPaymentStatus.execute(id);
+      response.status(200).json({ status });
     } catch (err: any) {
       response.status(500).send(err.message);
     }
