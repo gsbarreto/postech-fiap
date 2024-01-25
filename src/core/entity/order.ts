@@ -26,6 +26,10 @@ export default class Order {
   setStatus(status: OrderStatus) {
     this.status = status;
   }
+
+  setPayment(payment: Payment) {
+    this.payment = payment;
+  }
 }
 
 export type ProductAndQuantity = {

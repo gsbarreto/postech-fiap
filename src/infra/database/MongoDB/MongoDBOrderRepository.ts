@@ -7,6 +7,7 @@ import { ProductModel } from "./schemas/Product";
 import CustomerAdapter from "../../../adapter/CustomerAdapter";
 import CategoryAdapter from "../../../adapter/CategoryAdapter";
 import ProductAdapter from "../../../adapter/ProductAdapter";
+import Payment from "../../../core/entity/payment";
 
 export default class MongoDBOrderrepository implements IOrderRepository {
   async save(order: Order): Promise<Order> {
@@ -29,10 +30,10 @@ export default class MongoDBOrderrepository implements IOrderRepository {
   }
 
   async update(order: Order): Promise<Order> {
-    const orderFound = await OrderModel.findOne({ id: order.id });
+    const orderFound = await OrderModel.findOne({ id: order.id }).exec();
     if (!orderFound) throw new Error("Order not found");
     await OrderModel.updateOne({ id: order.id }, order);
-    const updatedOrder = await OrderModel.findOne({ id: order.id });
+    const updatedOrder = await OrderModel.findOne({ id: order.id }).exec();
     if (!updatedOrder) throw new Error("Failed to update order");
     return await convertModelToObject(updatedOrder);
   }
@@ -69,6 +70,9 @@ const convertModelToObject = async (order: IOrderModel) => {
   );
 
   const orderMounted = new Order(order.id || "", customer, arrayItems);
+  const payment = new Payment();
+  payment.changeStatus(order.payment?.status || "REFUSED");
+  orderMounted.setPayment(payment);
   orderMounted.setStatus(order.status as OrderStatus);
   return orderMounted;
 };
