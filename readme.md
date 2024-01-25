@@ -29,6 +29,10 @@ senha:pass
 - Framework Express
 - Mongo database
 
+### Execução da 2 fase do tech challenge
+
+
+
 ### Integrantes Grupo 76
 
 Gabriel da Silva Barreto<br>
