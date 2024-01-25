@@ -1,0 +1,25 @@
+## APP Web
+
+# Criar imagem da APP web para o local (rodar a partir de onde se encontra o arquivo do docker compose)
+docker compose up --build
+
+# Gerar imagem da APP web para dockerhub
+docker tag postech-fiap-web:latest grunbruno/web-app-tech-challenge:1.0.1
+
+# Subir a imagem para o dockerhub
+docker push grunbruno/web-app-tech-challenge:1.0.1
+
+## MongoDB
+# Criar imagem do MongoDB local
+docker build -t mongo-tech-challenge .
+
+# Gerar imagem Mongo para o dockerhub
+docker tag mongo-tech-challenge:latest grunbruno/mongo-tech-challenge:1.0.0
+
+# Subir a imagem para o dockerhub
+docker push grunbruno/mongo-tech-challenge:<TAG> 
+
+# Comando para subir o container do MongoDB a partir da imagem local
+docker run -d --name container-mongo-tech-challenge -p 27017:27017 mongo-tech-challenge
+
+

@@ -1,0 +1,30 @@
+Docker:
+1- Criei uma imagem do MongoDB com script de criação inicial do nosso banco e os dados
+2- Criei uma imagem da app node
+3- Subi as duas imagens pro meu dockerhub
+
+Kubernetes:
+1- Criei um configMap com env's da app
+2- Criei um configMap com env's do Mongo Express
+3- Criei um diretório "mongodb-data-pv" em /C/Users/grunb/
+4- Entrei no DockerDesktop e configurei (file Sharing em Setting -> Resources -> File Sharing) meu diretório criado na minha máquina Windows 
+5- Criei um pvc para o Mongo
+6- Criei um StatefulSet com 1 replica e um svc (ClusterIP) do banco
+7- Criei um deployment com 3 replicas e um svc (NodePort) da app
+8- Criei um deployment com 1 replica e um svc (NodePort) do Mongo Express (não precisou criar uma imagem pois é padrão só com variáveis de ambiente)
+9- Criei um componente de métricas para acompanhar o consumo de CPU para o HPA
+10- Criei um HPA
+
+
+##TODO
+3- Inserir health checks
+4- Iserir HPA
+5- CLOUD? 
+
+
+# O que não rolou
+1- Criar usuário e senha do Mongo e banco fastfood (ficou como test)
+
+
+
+
