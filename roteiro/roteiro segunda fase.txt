@@ -58,3 +58,8 @@ Para os próximos passos da fase será necessário executar os seguintes passos
     {{dominio}}:30100/order/payment/status/e5bbb4c7-3da8-482d-b73b-dcfb7d6b4734
 
 
+Caso for executar pelo swagger a rota é essa
+{{dominio}}:30100/api-docs/
+
+Caso for rodar pelo postman a collection da segunda fase será essa:
+https://github.com/gsbarreto/postech-fiap/blob/main/resources/postman-collection/Tech-challenge-Fase2.postman_collection.json

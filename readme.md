@@ -30,7 +30,7 @@ senha:pass
 - Mongo database
 
 ### Execução da 2 fase do tech challenge
-
+https://github.com/gsbarreto/postech-fiap/blob/main/roteiro/roteiro%20segunda%20fase.txt
 
 
 ### Integrantes Grupo 76
