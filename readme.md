@@ -1,6 +1,6 @@
 # Tech Challenger Pos Tech SOAT - Fase 2
 
-<a href="https://www.youtube.com/watch?v=XIh6OoHhGBs" target="_blank">Link vídeo detalhando Arquitetura k8s (Assistir ao vídeo junto com o desenho abaixo)/a>
+<a href="https://www.youtube.com/watch?v=XIh6OoHhGBs" target="_blank">Link vídeo detalhando Arquitetura k8s (Assistir ao vídeo junto com o desenho abaixo)</a>
 
 ### Arquitetura k8s
 ![Diagrama Arquitetura K8s](https://github.com/gsbarreto/postech-fiap/assets/10748518/9851466f-df08-49f2-8aa5-c43ffeaa6b18)
