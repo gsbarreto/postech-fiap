@@ -1,0 +1,60 @@
+### Para se rodar o projeto e os passos a serem dados
+- Caso for usar a arquitetura do kubernetes executar os processos conforme esse roteiro
+https://github.com/gsbarreto/postech-fiap/blob/feature/k8s/infra/roteiro%20k8s.txt
+
+- Caso queira rodar direto no docker rodar o comando 
+docker compose up 
+
+Em ambos ja se criara, alguns pedidos , produtos e clientes, pois subimos uma massa de dados, com as informações.
+
+Para os próximos passos da fase será necessário executar os seguintes passos 
+
+### Forma de execução das apis para execução da 2º fase
+
+- Passo 1: 
+    {{dominio}}:30100/order -> Get -> Lista todos os pedidos 
+    Quando listado todos os pedidos, é só escolher um para fazer os próximos passos .
+
+- Passo 2:
+    {{dominio}}:30100/order/status -> Post -> Atualiza o status do pedido 
+    Forma de enviar o json abaixo :
+
+    {
+        "id": "e5bbb4c7-3da8-482d-b73b-dcfb7d6b4734",
+        "status": "FINISHED"
+    }
+
+    Observação: Enviar o status do pedido com LETRAS MAIÚSCULAS 
+
+    Status que podem ser Enviados 
+    RECEIVED 
+    PREPARATION 
+    READY 
+    FINISHED 
+    Depois que executar, por favor execute o passo 1, para listar os pedidos e verificar o status do mesmo.
+
+
+- Passo 3 :
+    {{dominio}}:30100/webhook/payment -> Post -> atualiza o status do pagamento do pedido 
+    Forma de enviar o json abaixo :
+    {
+        "Id": "e5bbb4c7-3da8-482d-b73b-dcfb7d6b4734",
+        "topic": "payment",
+        "status": "PAID"
+    }
+
+    Observação: Enviar o o Status do pagamento em LETRAS MAIÚSCULAS.
+    Status que podem ser enviados:
+    PAID
+    REFUSED
+
+
+
+- Passo 4:
+    Retorna o status que o pagamento do pedido se encontra.
+
+    {{dominio}}:30100/order/payment/status/{id} -> Get -> Retorna o status do pagamento do pedido
+    Exemplo de uma chamada acima 
+    {{dominio}}:30100/order/payment/status/e5bbb4c7-3da8-482d-b73b-dcfb7d6b4734
+
+

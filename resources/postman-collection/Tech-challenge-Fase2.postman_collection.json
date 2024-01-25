@@ -186,6 +186,34 @@
 					"response": []
 				},
 				{
+					"name": "Order Status",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"7c4e7bc3-5735-4d29-a32d-f55c1be8df13\",\r\n    \"products\": [\r\n        {\r\n            \"id\": \"45696c9e-f346-429f-b7a6-757e08b6367e\",\r\n            \"quantity\": \"3\"\r\n        }\r\n    ]\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/order/checkout",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"order",
+								"checkout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "WebHook Payment",
 					"request": {
 						"method": "POST",
@@ -200,13 +228,13 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/wbhook/payment",
+							"raw": "localhost:3000/webhook/payment",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"wbhook",
+								"webhook",
 								"payment"
 							]
 						}
@@ -257,37 +285,6 @@
 							"path": [
 								"order",
 								"payment",
-								"status"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Status do pedido",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"Id\": \"\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:3000/order/status",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"order",
 								"status"
 							]
 						}
