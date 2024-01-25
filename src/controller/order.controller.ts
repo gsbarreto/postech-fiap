@@ -40,7 +40,6 @@ export default class OrderController {
       });
       response.status(200).send(order);
     } catch (err: any) {
-      console.log("error >>>", err.message);
       response.status(500).send(err.message);
     }
   }
@@ -84,11 +83,11 @@ export default class OrderController {
 
   async getOrderPaymentStatus(request: Request, response: Response) {
     try {
-      const { id } = request.query as {
+      const { id } = request.params as {
         id: string;
       };
       const getPaymentStatus = new GetPaymentStatus(this.orderRepository);
-      const status = getPaymentStatus.execute(id);
+      const status = await getPaymentStatus.execute(id);
       response.status(200).json({ status });
     } catch (err: any) {
       response.status(500).send(err.message);

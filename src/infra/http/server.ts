@@ -79,7 +79,7 @@ export default async () => {
   );
 
   server.get(
-    "/order/payment/status",
+    "/order/payment/status/:id",
     orderController.getOrderPaymentStatus.bind(orderController)
   );
 

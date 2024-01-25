@@ -259,7 +259,7 @@
         }
       }
     },
-    "/order/payment/status": {
+    "/order/payment/status/{Id}": {
       "get": {
         "summary": "Validar o status do pedido",
         "description": "Validar o status de um pedido .",
@@ -282,8 +282,8 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "properties":{
-                    "status" :{
+                  "properties": {
+                    "status": {
                       "type": "string"
                     }
                   }
@@ -308,7 +308,6 @@
             "schema": {
               "type": "string"
             }
-            
           },
           {
             "name": "Products",
@@ -336,35 +335,31 @@
           }
         }
       }
-    },  
+    },
     "/order/status": {
       "post": {
         "summary": "Atualizar status do pedido",
         "description": "Esta rota atualiza o status do pedido.",
         "tags": ["Order"],
-        "parameters": [
-          {
-            "name": "Id",
-            "in": "path",
-            "description": "Id do pedido",
-            "required": true,
-            "schema": {
-              "type": "string"
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "responses": {
+              "200": {
+                "description": "Order updated"
+              }
             }
-          },
-          {
-            "name": "Status",
-            "in": "path",
-            "description": "Status do pedido",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Order updated"
           }
         }
       }
@@ -376,8 +371,8 @@
         "tags": ["Order"],
         "parameters": [
           {
-            "name": "Id",
-            "in": "path",
+            "name": "id",
+            "in": "body",
             "description": "Id do pedido",
             "required": true,
             "schema": {
@@ -385,8 +380,8 @@
             }
           },
           {
-            "name": "Topic",
-            "in": "path",
+            "name": "topic",
+            "in": "body",
             "description": "Tópico de alteração do pagamento , requerido pelo Mercado Pago",
             "required": true,
             "schema": {
@@ -394,8 +389,8 @@
             }
           },
           {
-            "name": "Status",
-            "in": "path",
+            "name": "status",
+            "in": "body",
             "description": "Status do pedido",
             "required": true,
             "schema": {
@@ -467,17 +462,17 @@
           "id": {
             "type": "string"
           },
-          "createdAt":{
+          "createdAt": {
             "type": "string",
             "format": "date"
           },
-          "payment":{
+          "payment": {
             "$ref": "#/components/schemas/Payment"
           },
           "itens": {
             "type": "array"
           },
-          "status":{
+          "status": {
             "type": "string"
           },
           "customer": {
@@ -491,7 +486,7 @@
           "qrCode": {
             "type": "string"
           },
-          "status":{
+          "status": {
             "type": "string"
           }
         }
