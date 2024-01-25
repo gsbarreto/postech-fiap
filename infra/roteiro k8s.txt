@@ -1,0 +1,46 @@
+Roteiro para o teste (Habilitar o Kubernetes no Docker Desktop no Windows ou instalar o Minikube no Linux):
+
+1- Criar as configMap App e Mongo Express
+kubectl apply -f .\app-configmap.yaml
+kubectl apply -f .\mongo-express-configmap.yaml
+
+2- Criar o PVC 
+kubectl apply -f .\mongodb-pvc.yaml
+
+3- Criar o POD do Mongo 
+kubectl apply -f .\mongodb-statefulset.yaml
+
+4- Criar o Service do Mongo
+kubectl apply -f .\mongodb-svc.yaml
+
+5- Criar o POD do Mongo Express
+kubectl apply -f .\mongo-express-deployment.yaml
+
+6- Criar o Service do Mongo Express
+kubectl apply -f .\mongo-express-svc.yml
+
+7- Testar o Mongo Express (http://localhost:30300/  - admin/pass)
+
+8- Criar o POD da APP Node
+kubectl apply -f .\app-deployment.yaml
+
+9- Criar o Service da APP Node
+kubectl apply -f .\app-svc.yaml
+
+10- Testar a APP Node (http://localhost:30100/product)
+
+11- Criar o component para as métricas - HPA
+kubectl apply -f .\component-metric.yaml
+
+12- Criar o HPA da APP
+kubectl apply -f .\app-hpa.yaml
+
+Comandos par testar:
+#Checar o que está no ar
+kubectl get pod,deployment,statefulset,svc,pvc,pv -o wide
+
+#Keep Watch dos POD's
+kubectl get pod --watch
+
+#Keep Watch do HPA
+kubectl get hpa --watch

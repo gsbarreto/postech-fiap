@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-express-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongo-express-pod
+  template:
+    metadata:
+      name: mongo-express-pod
+      labels:
+        app: mongo-express-pod
+    spec:
+      containers:
+      - name: mongo-express-container
+        image: mongo-express
+        envFrom:
+        - configMapRef:
+            name: mongo-express-configmap
+        ports:
+          - containerPort: 8081

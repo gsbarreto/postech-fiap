@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tech-challenge-app-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: tech-challenge-app
+  template:
+    metadata:
+      name: tech-challenge-app
+      labels:
+        app: tech-challenge-app
+    spec:
+      containers:
+      - name: tech-challenge-pod
+        image: grunbruno/web-app-tech-challenge:1.0.1
+        envFrom:
+        - configMapRef:
+            name: app-configmap
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+          - containerPort: 3000
+        livenessProbe:
+          httpGet: 
+            path: /product
+            port: 3000
+          periodSeconds: 10
+          failureThreshold: 3
+          initialDelaySeconds: 20
+        readinessProbe:
+          httpGet: 
+            path: /product
+            port: 3000
+          periodSeconds: 10
+          failureThreshold: 6
+          initialDelaySeconds: 10
+        resources:
+          requests: 
+            cpu: 40m
