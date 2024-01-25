@@ -1,4 +1,4 @@
-# Tech Challenger Pos Tech Arquitetura de Software
+# Tech Challenger Pos Tech Arquitetura de Software - Fase 2
 
 ### Para rodar a aplicação
 ```sh
@@ -10,18 +10,18 @@ docker compose up --build
 > Fonte: https://stackoverflow.com/questions/70877785/docker-error-response-from-daemon-user-declined-directory-sharing
 
 ### Acesso app (porta default)
-{{dominio}}:3000/...
+{{dominio}}:30100/...
 
 ### Postman collection
 https://github.com/gsbarreto/postech-fiap/blob/main/resources/postman-collection/Tech-challenge-Fase1.postman_collection.json
 
 ### Client Mongo (porta default)
-{{dominio}}:8081 <br>
+{{dominio}}:30300 <br>
 login:admin <br>
 senha:pass
 
 ### Swagger (porta default)
-{{dominio}}:3000/api-docs/
+{{dominio}}:30100/api-docs/
 
 ### Stacks
 - Typescript

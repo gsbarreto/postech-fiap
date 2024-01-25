@@ -1,19 +1,3 @@
-Docker:
-1- Criei uma imagem do MongoDB com script de criação inicial do nosso banco e os dados
-2- Criei uma imagem da app node
-3- Subi as duas imagens pro meu dockerhub
-
-Kubernetes:
-1- Criei um configMap com env's da app
-2- Criei um configMap com env's do Mongo Express
-3- Criei um pvc para o Mongo
-4- Criei um StatefulSet com 1 replica e um svc (ClusterIP) do banco
-5- Criei um deployment com 3 replicas e um svc (NodePort) da app
-6- Criei um deployment com 1 replica e um svc (NodePort) do Mongo Express (não precisou criar uma imagem pois é padrão só com variáveis de ambiente)
-7- Criei um componente de métricas para acompanhar o consumo de CPU para o HPA
-8- Criei um HPA
-
-
 Roteiro para o teste (Habilitar o Kubernetes no Docker Desktop no Windows ou instalar o Minikube no Linux):
 
 1- Criar as configMap App e Mongo Express
@@ -51,5 +35,12 @@ kubectl apply -f .\component-metric.yaml
 12- Criar o HPA da APP
 kubectl apply -f .\app-hpa.yaml
 
+Comandos par testar:
+#Checar o que está no ar
+kubectl get pod,deployment,statefulset,svc,pvc,pv -o wide
 
+#Keep Watch dos POD's
+kubectl get pod --watch
 
+#Keep Watch do HPA
+kubectl get hpa --watch
