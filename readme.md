@@ -1,13 +1,13 @@
-# Tech Challenger Pos Tech Arquitetura de Software - Fase 2
+# Tech Challenger Pos Tech SOAT - Fase 2
 
-### Para rodar a aplicação
-```sh
-docker compose up --build
-```
+### Link vídeo detalhando Arquitetura k8s (Assistir ao vídeo junto com o desenho abaixo)
+https://www.youtube.com/watch?v=XIh6OoHhGBs
 
-> Caso apareça o erro: "Error response from daemon: user declined directory sharing ...." <br>
-> É necessário configurar o file sharing no docker <br>
-> Fonte: https://stackoverflow.com/questions/70877785/docker-error-response-from-daemon-user-declined-directory-sharing
+### Arquitetura k8s
+![Diagrama Arquitetura K8s](https://github.com/gsbarreto/postech-fiap/assets/10748518/9851466f-df08-49f2-8aa5-c43ffeaa6b18)
+
+### Roteiro para rodar k8s
+https://github.com/gsbarreto/postech-fiap/blob/feature/k8s/infra/roteiro%20k8s.txt
 
 ### Acesso app (porta default)
 {{dominio}}:30100/...
@@ -15,7 +15,7 @@ docker compose up --build
 ### Postman collection
 https://github.com/gsbarreto/postech-fiap/blob/main/resources/postman-collection/Tech-challenge-Fase1.postman_collection.json
 
-### Client Mongo (porta default)
+### Client Mongo Express (porta default)
 {{dominio}}:30300 <br>
 login:admin <br>
 senha:pass
