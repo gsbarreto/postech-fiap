@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: tech-challenge-pod
-        image: grunbruno/web-app-tech-challenge:1.0.1
+        image: grunbruno/web-app-tech-challenge:1.0.2
         envFrom:
         - configMapRef:
             name: app-configmap

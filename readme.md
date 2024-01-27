@@ -9,10 +9,17 @@ Vídeo <a href="https://www.youtube.com/watch?v=XIh6OoHhGBs" target="_blank">aqu
 ### Roteiro para rodar k8s
 https://github.com/gsbarreto/postech-fiap/blob/feature/k8s/infra/roteiro%20k8s.txt
 
+### Roteiro de testes da app - fase 2 do tech challenge
+https://github.com/gsbarreto/postech-fiap/blob/main/roteiro/roteiro%20segunda%20fase.txt
+
 ### Acesso app (porta default)
 {{dominio}}:30100/...
 
 ### Postman collection
+#### Fase 2
+https://github.com/gsbarreto/postech-fiap/blob/main/resources/postman-collection/Tech-challenge-Fase2.postman_collection.json
+
+#### Fase 1
 https://github.com/gsbarreto/postech-fiap/blob/main/resources/postman-collection/Tech-challenge-Fase1.postman_collection.json
 
 ### Client Mongo Express (porta default)
@@ -28,10 +35,6 @@ senha:pass
 - NodeJS
 - Framework Express
 - Mongo database
-
-### Execução da 2 fase do tech challenge
-https://github.com/gsbarreto/postech-fiap/blob/main/roteiro/roteiro%20segunda%20fase.txt
-
 
 ### Integrantes Grupo 76
 

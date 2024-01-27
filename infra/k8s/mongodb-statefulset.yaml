@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: mongodb
-          image: grunbruno/mongo-tech-challenge:1.0.2
+          image: grunbruno/mongo-tech-challenge:1.0.3
           ports:
             - containerPort: 27017
           volumeMounts:
