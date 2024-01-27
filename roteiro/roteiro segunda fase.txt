@@ -9,8 +9,16 @@ Em ambos ja se criara, alguns pedidos , produtos e clientes, pois subimos uma ma
 
 Para os próximos passos da fase será necessário executar os seguintes passos 
 
-### Forma de execução das apis para execução da 2º fase
+Observação 
+Caso rode em KUBERNETES a url é essa 
+{{dominio}}:30100
 
+Caso roder em DOCKER a Url é essa 
+{{dominio}}:3000
+
+Os exemplos abaixo estão apontando para a rota de kubernetes 
+
+### Forma de execução das apis para execução da 2º fase
 - Passo 1: 
     {{dominio}}:30100/order -> Get -> Lista todos os pedidos 
     Quando listado todos os pedidos, é só escolher um para fazer os próximos passos .
