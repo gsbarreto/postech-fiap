@@ -7,7 +7,12 @@
   },
   "servers": [
     {
-      "url": "http://localhost:3000"
+      "url": "http://localhost:30100",
+      "description": "Caso use rodando pelo Kubernetes"
+    },
+    {
+      "url": "http://localhost:3000",
+      "description": "Caso use local usando docker"
     }
   ],
   "paths": {
