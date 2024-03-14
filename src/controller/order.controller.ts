@@ -20,11 +20,9 @@ export default class OrderController {
   async checkout(request: Request, response: Response) {
     try {
       const {
-        userId,
         products,
-      }: { userId: string; products: { id: string; quantity: number }[] } =
+      }: {  products: { id: string; quantity: number }[] } =
         request.body;
-      if (!userId) throw new Error("Invalid userId");
       if (!products || !Array.isArray(products))
         throw new Error("Invalid product list");
       if (products.length < 1) throw new Error("Empty cart");
@@ -35,7 +33,6 @@ export default class OrderController {
         this.paymentRepository
       );
       const order = await checkout.execute({
-        userId,
         products,
       });
       response.status(200).send(order);

@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import ICustomerRepository from "../core/repository/customerRepository";
 import GetCustomer from "../core/usecase/customer/getCustomer";
 import CreateCustomer from "../core/usecase/customer/createCustomer";
+import { randomUUID } from "crypto";
 
 export default class CustomerController {
   constructor(private readonly customerRepository: ICustomerRepository) {}
@@ -21,7 +22,9 @@ export default class CustomerController {
     try {
       const { name, cpf } = request.body;
       const createCustomer = new CreateCustomer(this.customerRepository);
+      const id = randomUUID();
       await createCustomer.execute({
+        id,
         name,
         cpf,
       });

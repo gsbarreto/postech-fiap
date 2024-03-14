@@ -4,13 +4,16 @@ import InMemoryCustomerRepository from "../../src/infra/database/Memory/InMemory
 import Customer from "../../src/core/entity/customer";
 import GetCustomer from "../../src/core/usecase/customer/getCustomer";
 import CPF from "../../src/core/entity/value-objects/cpf";
+import { randomUUID } from "crypto";
 
 test("should create a customer", async () => {
   const name = "Joaquim";
   const cpf = "270.630.960-10";
+  const id = randomUUID();
   const customerRepositoryMemory = new InMemoryCustomerRepository();
   const createCustomer = new CreateCustomer(customerRepositoryMemory);
   await createCustomer.execute({
+    id,
     name,
     cpf,
   });
@@ -22,7 +25,8 @@ test("should create a customer", async () => {
 test("should get a customer", async () => {
   const name = "Maria";
   const cpf = "888.532.070-86";
-  const newCustomer = new Customer(null, name, new CPF(cpf));
+  const id = randomUUID();
+  const newCustomer = new Customer(id, name, new CPF(cpf));
   const customerRepositoryMemory = new InMemoryCustomerRepository();
   await customerRepositoryMemory.save(newCustomer);
   const getCustomer = new GetCustomer(customerRepositoryMemory);
