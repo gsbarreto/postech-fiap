@@ -1,0 +1,13 @@
+name: Go
+
+on:
+  push:
+    branches: [ '*' ]
+  pull_request:
+    branches: [ '*' ]
+
+jobs:
+
+  Deploy_EKS:
+     uses: ./.github/workflows/tf-eks.yml
+     secrets: inherit

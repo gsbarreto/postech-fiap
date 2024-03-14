@@ -1,0 +1,68 @@
+name: kubernetes
+
+on:
+  workflow_call:
+
+jobs:
+
+  EKS:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: configurando credenciais da AWS
+      uses: aws-actions/configure-aws-credentials@v3
+      with:
+        aws-access-key-id: ${{ secrets.AWS_KEY }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET }}
+        aws-region: us-east-1
+
+    - run: git clone https://github.com/leollo98/Infra_CI_Kubernetes.git
+
+    - name: Show AWS CLI Configuration
+      run: aws configure list
+           
+    - name: HashiCorp - Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+ 
+    - name: Terraform Init
+      run: terraform -chdir=Infra_CI_Kubernetes/env/prod init 
+
+    - name: Terraform Validate
+      run: terraform -chdir=Infra_CI_Kubernetes/env/prod validate
+
+    - name: LS
+      run: ls
+
+    - name: Terraform Apply
+      run: terraform -chdir=Infra_CI_Kubernetes/env/prod apply -auto-approve 
+  
+    - run: echo "$(terraform -chdir=Infra_CI_Kubernetes/env/prod output -raw LBHostname)"
+      id: LBHostname
+
+    - name: Kubectl tool installer
+      uses: Azure/setup-kubectl@v3
+      
+    - run: aws sts get-caller-identity
+    
+    - run: aws eks update-kubeconfig --region us-west-2 --name homolog2
+    
+    - run: kubectl get svc
+
+    - name: Criando configMap da APP
+      run: kubectl apply -f Infra_CI_Kubernetes/k8s-app/app-configmap.yaml
+
+    - name: Criando Deployment da APP
+      run: kubectl apply -f Infra_CI_Kubernetes/k8s-app/app-deployment.yaml
+
+    - name: Criando SVC da APP
+      run: kubectl apply -f Infra_CI_Kubernetes/k8s-app/app-svc.yaml
+
+    - name: Criando Metric da APP
+      run: kubectl apply -f Infra_CI_Kubernetes/k8s-app/component-metric.yaml
+
+    - name: Criando HPA  da APP
+      run: kubectl apply -f Infra_CI_Kubernetes/k8s-app/app-hpa.yaml
+    
+    - name: Alterando a imagem da APP
+      run: kubectl set image deployment/tech-challenge-app-deployment tech-challenge-pod=grunbruno/web-app-tech-challenge:1.0.3
