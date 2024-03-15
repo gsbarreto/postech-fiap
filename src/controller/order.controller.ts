@@ -8,6 +8,7 @@ import IPaymentRepository from "../core/repository/paymentRepository";
 import ChangePaymentStatus from "../core/usecase/order/changePaymentStatus";
 import ChangeStatus from "../core/usecase/order/changeStatus";
 import GetPaymentStatus from "../core/usecase/order/getPaymentStatus";
+import AuthorizationConfig from "../configurations/cacheConfigurations";
 
 export default class OrderController {
   constructor(
@@ -19,9 +20,16 @@ export default class OrderController {
 
   async checkout(request: Request, response: Response) {
     try {
+      const token = request.headers.authorization;
+      console.log(token);
+      let userId = null;
+
+      if (token)
+         userId = await AuthorizationConfig.getUserIdByToken(token);
+
       const {
         products,
-      }: {  products: { id: string; quantity: number }[] } =
+      }: {   products: { id: string; quantity: number }[] } =
         request.body;
       if (!products || !Array.isArray(products))
         throw new Error("Invalid product list");
@@ -33,7 +41,8 @@ export default class OrderController {
         this.paymentRepository
       );
       const order = await checkout.execute({
-        products,
+        userId,
+        products
       });
       response.status(200).send(order);
     } catch (err: any) {

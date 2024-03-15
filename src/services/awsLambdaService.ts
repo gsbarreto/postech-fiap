@@ -61,8 +61,6 @@ export default class AwsLambdaService {
         console.log('Resposta da função Lambda:', response);
 
         if (response.data !== null && response.data !== undefined){
-            await this.cacheConfiguration.salvarTokenNoCache(response.data);
-            await this.cacheConfiguration.obterTokenDoCache();
             return response.data;
         } 
         else    

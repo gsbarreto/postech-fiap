@@ -20,13 +20,11 @@ export default class Checkout {
 
   async execute(input: Input): Promise<Order> {
     const { products } = input;
+    
+    console.log("Esse é o usuario " + input.userId);
 
-    let userId = await this.cacheconfiguration.obterTokenDoCache();
-    userId = userId !== null ? userId : null;
-    console.log("Esse é o usuario " + userId);
-
-    if (!userId) throw new Error("Invalid user id!");
-    const customer = await this.customerRepository.get({ id: userId.toString() });
+    if (!input.userId) throw new Error("Invalid user id!");
+      const customer = await this.customerRepository.get({ id: input.userId });
     if (!customer) throw new Error("Customer not found!");
 
     if (products.length === 0) throw new Error("Empty cart!");
@@ -56,7 +54,7 @@ export default class Checkout {
 }
 
 type Input = {
-  //userId: string;
+  userId: string;
   products: {
     id: string;
     quantity: number;
