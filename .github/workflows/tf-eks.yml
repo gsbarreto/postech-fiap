@@ -17,7 +17,7 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET }}
         aws-region: us-east-1
 
-    - run: git clone https://github.com/leollo98/Infra_CI_Kubernetes.git
+    - run: git clone https://github.com/grunbruno/postech-tf-k8s.git
 
     - name: Show AWS CLI Configuration
       run: aws configure list
@@ -26,18 +26,18 @@ jobs:
       uses: hashicorp/setup-terraform@v3
  
     - name: Terraform Init
-      run: terraform -chdir=Infra_CI_Kubernetes/env/prod init 
+      run: terraform -chdir=postech-tf-k8s/env/prod init 
 
     - name: Terraform Validate
-      run: terraform -chdir=Infra_CI_Kubernetes/env/prod validate
+      run: terraform -chdir=postech-tf-k8s/env/prod validate
 
     - name: LS
       run: ls
 
     - name: Terraform Apply
-      run: terraform -chdir=Infra_CI_Kubernetes/env/prod apply -auto-approve 
+      run: terraform -chdir=postech-tf-k8s/env/prod apply -auto-approve 
   
-    - run: echo "$(terraform -chdir=Infra_CI_Kubernetes/env/prod output -raw LBHostname)"
+    - run: echo "$(terraform -chdir=postech-tf-k8s/env/prod output -raw LBHostname)"
       id: LBHostname
 
     - name: Kubectl tool installer
@@ -50,19 +50,19 @@ jobs:
     - run: kubectl get svc
 
     - name: Criando configMap da APP
-      run: kubectl apply -f Infra_CI_Kubernetes/k8s-app/app-configmap.yaml
+      run: kubectl apply -f postech-tf-k8s/k8s-app/app-configmap.yaml
 
     - name: Criando Deployment da APP
-      run: kubectl apply -f Infra_CI_Kubernetes/k8s-app/app-deployment.yaml
+      run: kubectl apply -f postech-tf-k8s/k8s-app/app-deployment.yaml
 
     - name: Criando SVC da APP
-      run: kubectl apply -f Infra_CI_Kubernetes/k8s-app/app-svc.yaml
+      run: kubectl apply -f postech-tf-k8s/k8s-app/app-svc.yaml
 
     - name: Criando Metric da APP
-      run: kubectl apply -f Infra_CI_Kubernetes/k8s-app/component-metric.yaml
+      run: kubectl apply -f postech-tf-k8s/k8s-app/component-metric.yaml
 
     - name: Criando HPA  da APP
-      run: kubectl apply -f Infra_CI_Kubernetes/k8s-app/app-hpa.yaml
+      run: kubectl apply -f postech-tf-k8s/k8s-app/app-hpa.yaml
     
     - name: Alterando a imagem da APP
       run: kubectl set image deployment/tech-challenge-app-deployment tech-challenge-pod=grunbruno/web-app-tech-challenge:1.0.3
