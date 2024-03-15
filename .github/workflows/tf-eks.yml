@@ -43,6 +43,8 @@ jobs:
     - run: aws sts get-caller-identity
     
     - run: aws eks update-kubeconfig --region us-east-1 --name TechChallengeClusterPROD
+
+    - run: cat ~/.kube/config
     
     - run: kubectl get svc
 
