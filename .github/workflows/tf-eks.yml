@@ -37,15 +37,12 @@ jobs:
     - name: Terraform Apply
       run: terraform -chdir=postech-tf-k8s/env/prod apply -auto-approve 
   
-    - run: echo "$(terraform -chdir=postech-tf-k8s/env/prod output -raw LBHostname)"
-      id: LBHostname
-
     - name: Kubectl tool installer
       uses: Azure/setup-kubectl@v3
       
     - run: aws sts get-caller-identity
     
-    - run: aws eks update-kubeconfig --region us-west-2 --name homolog2
+    - run: aws eks update-kubeconfig --region us-east-1 --name TechChallengeClusterPROD
     
     - run: kubectl get svc
 
