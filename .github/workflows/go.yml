@@ -14,3 +14,4 @@ jobs:
   Deploy_EKS:
      uses: ./.github/workflows/tf-eks.yml
      secrets: inherit
+     needs: BUILD_IMAGE_ECR
