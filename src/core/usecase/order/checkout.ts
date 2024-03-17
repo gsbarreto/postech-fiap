@@ -3,20 +3,27 @@ import ICustomerRepository from "../../repository/customerRepository";
 import IOrderRepository from "../../repository/orderRepository";
 import IPaymentRepository from "../../repository/paymentRepository";
 import IProductRepository from "../../repository/productRepository";
+import CacheConfiguration from "../../../configurations/cacheConfigurations";
+import { read } from "fs";
 
 export default class Checkout {
+  cacheconfiguration: CacheConfiguration;
   constructor(
     readonly orderRepository: IOrderRepository,
     readonly customerRepository: ICustomerRepository,
     readonly productRepository: IProductRepository,
     readonly paymentRepository: IPaymentRepository
-  ) {}
+  ) {
+    this.cacheconfiguration = new CacheConfiguration();
+  }
 
   async execute(input: Input): Promise<Order> {
-    const { userId, products } = input;
+    const { products } = input;
 
-    if (!userId) throw new Error("Invalid user id!");
-    const customer = await this.customerRepository.get({ id: userId });
+    console.log("Esse é o usuario " + input.userId);
+
+    if (!input.userId) throw new Error("Invalid user id!");
+    const customer = await this.customerRepository.get({ id: input.userId });
     if (!customer) throw new Error("Customer not found!");
 
     if (products.length === 0) throw new Error("Empty cart!");

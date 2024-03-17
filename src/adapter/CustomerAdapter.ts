@@ -8,7 +8,7 @@ export default class CustomerAdapter {
 }
 
 type InputCreate = {
-  id: string | null;
+  id: string;
   name: string;
   cpf: string;
 };
