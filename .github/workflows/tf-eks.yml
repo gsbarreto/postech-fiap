@@ -42,7 +42,7 @@ jobs:
       
     - run: aws sts get-caller-identity
     
-    - run: aws eks update-kubeconfig --region us-east-1 --name TechChallengeClusterPROD
+    - run: aws eks update-kubeconfig --region us-east-1 --name ${{ vars.AWS_EKS_CLUSTER_NAME }} 
 
     - run: cat ~/.kube/config
     
