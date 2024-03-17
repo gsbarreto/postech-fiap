@@ -15,7 +15,7 @@ jobs:
       with:
         aws-access-key-id: ${{ secrets.AWS_KEY }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET }}
-        aws-region: ${{ secrets.AWS_REGION }}
+        aws-region: ${{ vars.AWS_REGION }}
 
     - run: git clone https://github.com/grunbruno/postech-tf-k8s.git
 
@@ -64,4 +64,4 @@ jobs:
       run: kubectl apply -f postech-tf-k8s/k8s-app/app-hpa.yaml
     
     - name: Alterando a imagem da APP
-      run: kubectl set image deployment/tech-challenge-app-deployment tech-challenge-pod=${{ secrets.DOCKER_IMAGE_NAME }}:${{ secrets.DOCKER_IMAGE_VERSION }}
+      run: kubectl set image deployment/tech-challenge-app-deployment tech-challenge-pod=${{ vars.DOCKER_IMAGE_NAME }}:${{ vars.DOCKER_IMAGE_VERSION }}
