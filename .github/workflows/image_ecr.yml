@@ -26,10 +26,10 @@ jobs:
       run: docker build . -t  ${{ vars.DOCKER_IMAGE_NAME }}:${{ vars.DOCKER_IMAGE_VERSION }}
 
     - name: Tag Docker image
-      run: docker tag ${{ vars.DOCKER_IMAGE_NAME }}:${{ vars.DOCKER_IMAGE_VERSION }} ${{ vars.AWS_ECR_URL }}.${{ vars.AWS_REGION }}.amazonaws.com/${{ vars.AWS_ECR_REPOSITORY_NAME }}:${{ vars.DOCKER_IMAGE_VERSION }}
+      run: docker tag ${{ vars.DOCKER_IMAGE_NAME }}:${{ vars.DOCKER_IMAGE_VERSION }} 843787865322.dkr.ecr.us-east-1.amazonaws.com.${{ vars.AWS_REGION }}.amazonaws.com/${{ vars.AWS_ECR_REPOSITORY_NAME }}:${{ vars.DOCKER_IMAGE_VERSION }}
       
     - name: List Docker images
       run: docker images
 
     - name: Push Docker image to ECR
-      run: docker push ${{ vars.AWS_ECR_URL }}.${{ vars.AWS_REGION }}.amazonaws.com/${{ vars.AWS_ECR_REPOSITORY_NAME }}:${{ vars.DOCKER_IMAGE_VERSION }}
+      run: docker push 843787865322.dkr.ecr.us-east-1.amazonaws.com.${{ vars.AWS_REGION }}.amazonaws.com/${{ vars.AWS_ECR_REPOSITORY_NAME }}:${{ vars.DOCKER_IMAGE_VERSION }}
