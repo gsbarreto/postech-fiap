@@ -10,7 +10,7 @@ on:
 
 jobs:
   APP_TESTS:
-    uses: ./.github/workflows/test.yml
+    uses: ./.github/workflows/tests.yml
     secrets: inherit    
 
   BUILD_IMAGE_ECR:
