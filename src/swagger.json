@@ -101,6 +101,96 @@
         }
       }
     },
+    "/validation/register": {
+      "post": {
+        "summary": "Registrar cliente",
+        "description": "Esta rota registrar um novo cliente na identidade de usuários",
+        "tags": ["Validation"],
+        "parameters": [
+          {
+            "name": "cpf",
+            "in": "path",
+            "description": "CPF do cliente",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "nome",
+            "in": "path",
+            "description": "Nome do cliente",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "email",
+            "in": "path",
+            "description": "Email do cliente",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cliente cadastrado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Cliente não cadastrado!"
+          },
+          "500": {
+            "description": "Cliente não cadastrado!"
+          }
+        }
+      }
+    },
+    "/validation/authenticate/{Cpf}": {
+      "get": {
+        "summary": "Retornar o token do identidade",
+        "description": "Retornar o token do identidade",
+        "tags": ["Validation"],
+        "parameters": [
+          {
+            "name": "Cpf",
+            "in": "path",
+            "description": "Cpf do cliente",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Token encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Cliente não cadastrado!"
+          },
+          "500": {
+            "description": "Cliente não cadastrado!"
+          }
+        }
+      }
+    },
     "/product": {
       "get": {
         "summary": "Obter todos os produtos",

@@ -21,7 +21,7 @@ test("should do a checkout", async () => {
   const productRepository = new InMemoryProductRepository();
   const paymentRepository = new MercadoPago();
   const customer = new Customer(
-    null,
+    "abc-123",
     "João Barbosa",
     new CPF("023.914.260-89")
   );
@@ -53,7 +53,6 @@ test("should do a checkout", async () => {
     paymentRepository
   );
   const order = await checkout.execute({
-    userId: customer.id || "",
     products: [
       { id: product1.id || "", quantity: 2 },
       { id: product2.id || "", quantity: 1 },

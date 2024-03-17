@@ -28,7 +28,7 @@ export default class MongoDBCustomerRepository implements ICustomerRepository {
       cpf: customer.cpf.get(),
     }).exec();
     if (queryCustomer) throw new Error("Customer already registered.");
-    customer.setId(randomUUID());
+    //customer.setId(randomUUID());
     await new CustomerModel({ ...customer, cpf: customer.cpf.get() }).save();
     return customer;
   }

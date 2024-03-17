@@ -7,12 +7,13 @@ export default class CreateCustomer {
 
   async execute(input: Input) {
     await this.customerRepository.save(
-      new Customer(null, input.name, new CPF(input.cpf))
+      new Customer(input.id, input.name, new CPF(input.cpf))
     );
   }
 }
 
 type Input = {
+  id: string;
   name: string;
   cpf: string;
 };

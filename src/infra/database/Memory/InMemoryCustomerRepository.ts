@@ -17,7 +17,6 @@ export default class InMemoryCustomerRepository implements ICustomerRepository {
   }
 
   async save(customer: Customer): Promise<Customer> {
-    customer.setId(crypto.randomUUID());
     this.customer.push(customer);
     return customer;
   }

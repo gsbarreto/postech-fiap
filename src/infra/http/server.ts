@@ -13,6 +13,7 @@ import MongoDBOrderrepository from "../database/MongoDB/MongoDBOrderRepository";
 import CustomerController from "../../controller/customer.controller";
 import OrderController from "../../controller/order.controller";
 import ProductController from "../../controller/product.controller";
+import AuthController from "../../controller/auth.controller";
 import MercadoPago from "../payment/mercadoPago";
 
 const server = express();
@@ -28,21 +29,12 @@ export default async () => {
 
   const customerController = new CustomerController(customerRepository);
   const productController = new ProductController(productRepository);
+  const validationController = new AuthController(customerRepository);
   const orderController = new OrderController(
     orderRepository,
     customerRepository,
     productRepository,
     paymentRepository
-  );
-
-  server.get(
-    "/customer/cpf/:cpf",
-    customerController.getCustomerByCPF.bind(customerController)
-  );
-
-  server.post(
-    "/customer",
-    customerController.createCustomer.bind(customerController)
   );
 
   server.get("/product", productController.getProducts.bind(productController));
@@ -86,6 +78,16 @@ export default async () => {
   server.post(
     "/order/status",
     orderController.updateStatus.bind(orderController)
+  );
+
+  server.post(
+    "/validation/register",
+    validationController.register.bind(validationController)
+  );
+
+  server.get(
+    "/validation/authenticate/:cpf",
+    validationController.authenticate.bind(validationController)
   );
 
   server.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
