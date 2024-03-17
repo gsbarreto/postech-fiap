@@ -53,6 +53,7 @@ test("should do a checkout", async () => {
     paymentRepository
   );
   const order = await checkout.execute({
+    userId: "abc-123",
     products: [
       { id: product1.id || "", quantity: 2 },
       { id: product2.id || "", quantity: 1 },
