@@ -1,5 +1,5 @@
 # Tech Challenger Pos Tech SOAT - Fase 3
-### Repositórtio: App Node com CI/CD
+### Repositório: App Node com CI/CD
 
 Link do vídeo detalhando Infra pode ser visto <a href="https://www.youtube.com/watch?v=NSo-g591sfc" target="_blank">aqui</a> <br>
 Link do vídeo detalhando Lambda pode ser visto <a href="https://www.youtube.com/watch?v=bhSfoafsJRI" target="_blank">aqui</a> <br>
