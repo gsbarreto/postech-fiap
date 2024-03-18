@@ -1,0 +1,24 @@
+name: Go
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  APP_TESTS:
+    uses: ./.github/workflows/tests.yml
+    secrets: inherit    
+
+  BUILD_IMAGE_ECR:
+    uses: ./.github/workflows/image_ecr.yml
+    secrets: inherit
+    needs: APP_TESTS
+
+  Deploy_EKS:
+     uses: ./.github/workflows/tf-eks.yml
+     secrets: inherit
+     needs: BUILD_IMAGE_ECR

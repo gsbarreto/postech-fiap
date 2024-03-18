@@ -1,0 +1,67 @@
+name: kubernetes
+
+on:
+  workflow_call:
+
+jobs:
+
+  EKS:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: configurando credenciais da AWS
+      uses: aws-actions/configure-aws-credentials@v3
+      with:
+        aws-access-key-id: ${{ secrets.AWS_KEY }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET }}
+        aws-region: ${{ vars.AWS_REGION }}
+
+    - run: git clone https://github.com/grunbruno/postech-tf-k8s.git
+
+    - name: Show AWS CLI Configuration
+      run: aws configure list
+           
+    - name: HashiCorp - Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+ 
+    - name: Terraform Init
+      run: terraform -chdir=postech-tf-k8s/env/prod init 
+
+    - name: Terraform Validate
+      run: terraform -chdir=postech-tf-k8s/env/prod validate
+
+    - name: LS
+      run: ls
+
+    - name: Terraform Apply
+      run: terraform -chdir=postech-tf-k8s/env/prod apply -auto-approve 
+  
+    - name: Kubectl tool installer
+      uses: Azure/setup-kubectl@v3
+      
+    - run: aws sts get-caller-identity
+    
+    - run: aws eks update-kubeconfig --region us-east-1 --name ${{ vars.AWS_EKS_CLUSTER_NAME }} 
+
+    - run: cat ~/.kube/config
+    
+    - run: kubectl get svc
+
+    - name: Criando configMap da APP
+      run: kubectl apply -f postech-tf-k8s/k8s-app/app-configmap.yaml
+
+    - name: Criando Deployment da APP
+      run: kubectl apply -f postech-tf-k8s/k8s-app/app-deployment.yaml
+
+    - name: Criando SVC da APP
+      run: kubectl apply -f postech-tf-k8s/k8s-app/app-svc.yaml
+
+    - name: Criando Metric da APP
+      run: kubectl apply -f postech-tf-k8s/k8s-app/component-metric.yaml
+
+    - name: Criando HPA  da APP
+      run: kubectl apply -f postech-tf-k8s/k8s-app/app-hpa.yaml
+    
+    - name: Alterando a imagem da APP
+      run: kubectl set image deployment/tech-challenge-app-deployment tech-challenge-pod=${{ vars.DOCKER_IMAGE_NAME }}:${{ vars.DOCKER_IMAGE_VERSION }}
