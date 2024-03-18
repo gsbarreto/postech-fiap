@@ -1,4 +1,4 @@
-# Tech Challenger Pos Tech SOAT - Fase 3
+# Tech Challenge Pos Tech SOAT - Fase 3
 ### Repositório: App Node com CI/CD
 
 Link do vídeo detalhando Infra pode ser visto <a href="https://www.youtube.com/watch?v=NSo-g591sfc" target="_blank">aqui</a> <br>
